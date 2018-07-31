@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yhsl.ipproxypools.mapper.ipsourceconf.IPSourceConfMapper">
+    <insert id="addConf" parameterType="com.yhsl.ipproxypools.domain.IPSourceConf">
+        INSERT INTO IPPROXYPOOLS.T_IP_SOURCE_CONF (
+        ID,
+        COL_NAME,
+        COL_FIELD,
+        COL_NUM,
+        COL_ELEMENTS,
+        COL_ATTR,
+        IS_CHILD,
+        CHILD_ELEMENT_KEY,
+        CHILD_ELEMENT_ATTR,
+        SOURCE_ID,
+        CREATE_TIME
+        )
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.id},
+            #{item.colName},
+            #{item.colField},
+            #{item.colNum},
+            #{item.colElements},
+            #{item.colAttr},
+            #{item.isChild},
+            #{item.childElementKey},
+            #{item.childElementAttr},
+            #{item.sourceId},
+            #{item.createTime}
+            )
+        </foreach>
+    </insert>
+    <select id="getConfBySource" resultType="com.yhsl.ipproxypools.domain.IPSourceConf">
+           SELECT
+            ID,
+            COL_NAME,
+            COL_FIELD,
+            COL_NUM,
+            COL_ELEMENTS,
+            COL_ATTR,
+            IS_CHILD,
+            CHILD_ELEMENT_KEY,
+            CHILD_ELEMENT_ATTR,
+            SOURCE_ID,
+            CREATE_TIME
+            FROM
+            IPPROXYPOOLS.T_IP_SOURCE_CONF
+            WHERE SOURCE_ID = #{sourceId}
+    </select>
+
+</mapper>

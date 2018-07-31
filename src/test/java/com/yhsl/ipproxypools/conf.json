@@ -1,0 +1,58 @@
+[
+  {
+    "colName": "ip地址",
+    "colField": "ipAddress",
+    "colElements":"span li",
+    "colNum": 0,
+    "colAttr": null,
+    "isChild": 0,
+    "childElementKey": null,
+    "childElementAttr": null,
+    "sourceId": "82c89dc7ba1841a584062ecc2bd50865"
+  },
+  {
+    "colName": "端口",
+    "colField": "ipPort",
+    "colElements":"span li",
+    "colNum": 1,
+    "colAttr": null,
+    "isChild": 0,
+    "childElementKey": null,
+    "childElementAttr": null,
+    "sourceId": "82c89dc7ba1841a584062ecc2bd50865"
+  },
+  {
+    "colName": "服务器位置",
+    "colField": "serverAddress",
+    "colElements":"span li",
+    "colNum": 5,
+    "colAttr": null,
+    "isChild": 0,
+    "childElementKey": null,
+    "childElementAttr": null,
+    "sourceId": "82c89dc7ba1841a584062ecc2bd50865"
+  },
+  {
+    "colName": "服务器位置",
+    "colField": "httpType",
+    "colElements":"span li",
+    "colNum": 3,
+    "colAttr": null,
+    "isChild": 0,
+    "childElementKey": null,
+    "childElementAttr": null,
+    "sourceId": "82c89dc7ba1841a584062ecc2bd50865"
+  },
+  {
+    "colName": "响应速度",
+    "colField": "ipSpeed",
+    "colElements":"span li",
+    "colNum": 7,
+    "colAttr": null,
+    "isChild": 0,
+    "childElementKey": null,
+    "childElementAttr": null,
+    "sourceId": "82c89dc7ba1841a584062ecc2bd50865"
+  }
+
+]

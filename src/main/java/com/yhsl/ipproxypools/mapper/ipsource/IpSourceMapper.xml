@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yhsl.ipproxypools.mapper.ipsource.IpSourceMapper">
+    <insert id="add" parameterType="com.yhsl.ipproxypools.domain.IPSource">
+       INSERT INTO IPPROXYPOOLS.T_IP_SOURCE (
+            ID,
+            SOURCE_NAME,
+            SOURCE_URL,
+            MAX_PAGE,
+            PAGE_ELEMENTS,
+            CREATE_TIME
+            )
+            VALUES
+                ( #{id},
+                 #{sourceName},
+                 #{sourceUrl},
+                 #{maxPage},
+                 #{pageElements},
+                 #{createTime}
+                 )
+    </insert>
+
+    <select id="getAll" resultType="com.yhsl.ipproxypools.domain.IPSource">
+      SELECT
+            ID,
+            SOURCE_NAME,
+            SOURCE_URL,
+            MAX_PAGE,
+            PAGE_ELEMENTS,
+            CREATE_TIME
+        FROM IPPROXYPOOLS.T_IP_SOURCE
+        ORDER BY CREATE_TIME
+    </select>
+
+    <select id="getById" resultType="com.yhsl.ipproxypools.domain.IPSource">
+      SELECT
+            ID,
+            SOURCE_NAME,
+            SOURCE_URL,
+            MAX_PAGE,
+            PAGE_ELEMENTS,
+            CREATE_TIME
+        FROM IPPROXYPOOLS.T_IP_SOURCE
+        WHERE ID=#{_parameter}
+    </select>
+
+</mapper>

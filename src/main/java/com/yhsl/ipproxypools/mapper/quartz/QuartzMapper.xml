@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yhsl.ipproxypools.mapper.quartz.QuartzMapper">
+    <insert id="add" parameterType="com.yhsl.ipproxypools.domain.QuartzJob">
+      INSERT INTO IPPROXYPOOLS.T_QUARTZ_JOB (
+        ID,
+        JOB_NAME,
+        JOB_GROUP,
+        CLASS_PATH,
+        METHOD_NAME,
+        STATUS,
+        CRON,
+        CREATE_TIME
+        )
+        VALUES
+            (
+                #{id},
+                #{jobName},
+                #{jobGroup},
+                #{classPath},
+                #{methodName},
+                #{status},
+                #{cron},
+                #{createTime}
+            )
+
+    </insert>
+    <select id="getAll" resultType="com.yhsl.ipproxypools.domain.QuartzJob">
+      SELECT ID,
+        JOB_NAME,
+        JOB_GROUP,
+        CLASS_PATH,
+        METHOD_NAME,
+        STATUS,
+        CRON,
+        CREATE_TIME
+        FROM IPPROXYPOOLS.T_QUARTZ_JOB
+    </select>
+
+
+    <select id="getById" resultType="com.yhsl.ipproxypools.domain.QuartzJob">
+      SELECT ID,
+        JOB_NAME,
+        JOB_GROUP,
+        CLASS_PATH,
+        METHOD_NAME,
+        STATUS,
+        CRON,
+        CREATE_TIME
+        FROM IPPROXYPOOLS.T_QUARTZ_JOB
+        WHERE ID=#{id}
+    </select>
+
+    <update id="uopdateJob" parameterType="com.yhsl.ipproxypools.domain.QuartzJob">
+      UPDATE IPPROXYPOOLS.T_QUARTZ_JOB
+        SET
+         JOB_NAME = #{jobName},
+         CLASS_PATH = #{classPath},
+         METHOD_NAME = #{methodName},
+         STATUS = #{status},
+         CRON = #{cron},
+         UPDATE_TIME = #{updateTime}
+        WHERE ID = #{id}
+    </update>
+
+</mapper>

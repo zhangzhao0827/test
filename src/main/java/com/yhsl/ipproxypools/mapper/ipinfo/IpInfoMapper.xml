@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yhsl.ipproxypools.mapper.ipinfo.IpInfoMapper">
+    <insert id="batchAdd" parameterType="com.yhsl.ipproxypools.domain.IPInfo">
+        INSERT INTO IPPROXYPOOLS.T_IP_INFO (
+        ID,
+        IP_ADDRESS,
+        IP_PORT,
+        HTTP_TYPE,
+        IP_SPEED,
+        SERVER_ADDRESS,
+        VERIFICATION_TIME,
+        SOURCE_ID,
+        CREATE_TIME,
+        PROXY_STATUS
+        )
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.id},
+            #{item.ipAddress},
+            #{item.ipPort},
+            #{item.httpType},
+            #{item.ipSpeed},
+            #{item.serverAddress},
+            #{item.verificationTime},
+            #{item.sourceId},
+            #{item.createTime},
+            #{item.proxyStatus}
+            )
+        </foreach>
+    </insert>
+    <select id="randomQueryIPInfo" resultType="com.yhsl.ipproxypools.domain.IPInfo">
+        SELECT TT.* FROM (SELECT
+        @ROWNUM:=@ROWNUM+1 AS ROWNUM,
+        T.ID,
+        T.IP_ADDRESS,
+        T.IP_PORT,
+        T.HTTP_TYPE,
+        T.IP_SPEED,
+        T.SERVER_ADDRESS,
+        T.VERIFICATION_TIME,
+        T.SOURCE_ID,
+        T.CREATE_TIME,
+        T.PROXY_STATUS
+        FROM T_IP_INFO T ,(SELECT @ROWNUM:=0) R
+        ORDER BY T.CREATE_TIME ) TT
+        WHERE TT.ROWNUM IN
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getToatl" resultType="int">
+        SELECT COUNT(1) FROM T_IP_INFO
+    </select>
+
+    <update id="update" parameterType="com.yhsl.ipproxypools.domain.IPInfo">
+        UPDATE IPPROXYPOOLS.T_IP_INFO
+        SET
+         IP_PORT = #{ipPort},
+         HTTP_TYPE =  #{httpType},
+         IP_SPEED = #{ipSpeed},
+         SERVER_ADDRESS = #{serverAddress},
+         VERIFICATION_TIME = #{verificationTime},
+         PROXY_STATUS = #{proxyStatus},
+         UPDATE_TIME = #{updateTime}
+        WHERE ID = #{id}
+    </update>
+
+    <update id="addOne" parameterType="com.yhsl.ipproxypools.domain.IPInfo">
+        INSERT INTO IPPROXYPOOLS.T_IP_INFO (
+        ID,
+        IP_ADDRESS,
+        IP_PORT,
+        HTTP_TYPE,
+        IP_SPEED,
+        SERVER_ADDRESS,
+        VERIFICATION_TIME,
+        SOURCE_ID,
+        CREATE_TIME,
+        PROXY_STATUS
+        )
+        VALUES
+            (
+            #{id},
+            #{ipAddress},
+            #{ipPort},
+            #{httpType},
+            #{ipSpeed},
+            #{serverAddress},
+            #{verificationTime},
+            #{sourceId},
+            #{createTime},
+            #{proxyStatus}
+            )
+    </update>
+
+    <select id="getOne" resultType="com.yhsl.ipproxypools.domain.IPInfo">
+        SELECT ID,
+        IP_ADDRESS,
+        IP_PORT,
+        HTTP_TYPE,
+        IP_SPEED,
+        SERVER_ADDRESS,
+        VERIFICATION_TIME,
+        SOURCE_ID,
+        CREATE_TIME,
+        PROXY_STATUS
+        FROM IPPROXYPOOLS.T_IP_INFO
+        WHERE 1=1
+        <if test="id !=null and id !=''">
+            AND ID=#{id}
+        </if>
+        <if test="ipAddress !=null and ipAddress !=''">
+            AND IP_ADDRESS=#{ipAddress}
+        </if>
+        <if test="ipPort !=null and ipPort !=''">
+            AND IP_PORT=#{ipPort}
+        </if>
+        <if test="httpType !=null and httpType !=''">
+            AND HTTP_TYPE=#{httpType}
+        </if>
+        LIMIT 1
+    </select>
+
+    <select id="getBy" resultType="com.yhsl.ipproxypools.domain.IPInfo">
+        SELECT ID,
+        IP_ADDRESS,
+        IP_PORT,
+        HTTP_TYPE,
+        IP_SPEED,
+        SERVER_ADDRESS,
+        VERIFICATION_TIME,
+        SOURCE_ID,
+        CREATE_TIME,
+        PROXY_STATUS
+        FROM IPPROXYPOOLS.T_IP_INFO
+        WHERE 1=1
+        <if test="id !=null and id !=''">
+            AND ID=#{id}
+        </if>
+        <if test="ipAddress !=null and ipAddress !=''">
+            AND IP_ADDRESS=#{ipAddress}
+        </if>
+        <if test="ipPort !=null and ipPort !=''">
+            AND IP_PORT=#{ipPort}
+        </if>
+        <if test="httpType !=null and httpType !=''">
+            AND HTTP_TYPE=#{httpType}
+        </if>
+    </select>
+
+
+</mapper>
